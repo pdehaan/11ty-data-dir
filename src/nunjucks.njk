@@ -1,0 +1,24 @@
+---
+eleventyComputed:
+  title: "Nunjucks {{ nunjucksVersion }}"
+---
+
+<h1>{{ title }}</h1>
+
+<!-- Step 1 (inspect) -->
+<pre>{{ profiles | inspect | safe }}</pre>
+
+{#
+<!-- Step 1.1 (inspect v2) -->
+<pre>{{ profiles | dump(2) | safe }}</pre>
+#}
+
+<!-- Step 2 (loop) -->
+{% for key, data in profiles %}
+  <p>{{ key }}:{{ data.name }}</p>
+{% endfor %}
+
+<!-- Step 3 (shuffle) -->
+{% for profile in profiles | values | shuffle %}
+  <p>{{ profile.name }}</p>
+{% endfor %}

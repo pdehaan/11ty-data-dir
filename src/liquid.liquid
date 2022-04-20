@@ -1,0 +1,27 @@
+---
+eleventyComputed:
+  title: "LiquidJS {{ liquidVersion }}"
+---
+
+<h1>{{ title }}</h1>
+
+<!-- Step 1 (inspect) -->
+<pre>{{ profiles | inspect }}</pre>
+
+{% comment %}
+<!-- Step 1.1 (inspect v2) -->
+<pre>{{ profiles | json }}</pre>
+{% endcomment %}
+
+<!-- Step 2 (loop) -->
+{% for profile in profiles %}
+  {%- assign key = profile[0] -%}
+  {%- assign data = profile[1] -%}
+  <p>{{ key }}:{{ data.name }}</p>
+{% endfor %}
+
+<!-- Step 3 (shuffle) -->
+{%- assign _profiles = profiles | values | shuffle -%}
+{% for profile in _profiles %}
+  <p>{{ profile | inspect }}</p>
+{% endfor %}
